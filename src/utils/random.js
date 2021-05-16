@@ -1,4 +1,5 @@
 const faker = require('faker')
+const CSV = require("./csv")
 
 class Random {    
     static generateRandomCountry() {
@@ -12,6 +13,17 @@ class Random {
     static generateRandomRating() {
         return faker.random.word()
     }    
+
+    static generateDataByColumnName(column) {
+        if (!column) return ""
+
+        if (column.fakeMapper){
+            const fakerData = column.fakeMapper.split('.') 
+            return faker[fakerData[0]][fakerData[1]]
+        }
+
+        return ""
+    }
 }
 
 module.exports = Random

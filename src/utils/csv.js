@@ -5,15 +5,15 @@ const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 class CSV {
     static getColumns() {
         return [
-            { id: 'Show Id', title: 'Show Id' },  
-            { id: 'Type', title: 'Type' }, 
-            { id: 'Title', title: 'Title' }, 
-            { id: 'Country', title: 'Country' }, 
-            { id: 'Date Added', title: 'Date Added' }, 
-            { id: 'Release Year', title: 'Release Year' }, 
-            { id: 'Rating', title: 'Rating' }, 
-            { id: 'Duration', title: 'Duration' }, 
-            {id: 'Listed In', title: 'Listed In' } 
+            { id: 'Show Id', title: 'Show Id', fakeMapper: '' },  
+            { id: 'Type', title: 'Type', fakeMapper: 'name.jobType' }, 
+            { id: 'Title', title: 'Title', fakeMapper: 'name.title' }, 
+            { id: 'Country', title: 'Country', fakeMapper: 'address.country' }, 
+            { id: 'Date Added', title: 'Date Added', fakeMapper: 'date.past' }, 
+            { id: 'Release Year', title: 'Release Year', fakeMapper: 'date.past' }, 
+            { id: 'Rating', title: 'Rating', fakeMapper: '' }, 
+            { id: 'Duration', title: 'Duration', fakeMapper: '' }, 
+            {id: 'Listed In', title: 'Listed In', fakeMapper: '' } 
         ]
     }
 
@@ -28,18 +28,14 @@ class CSV {
     }
 
     static fillJSONEmptyValues(arrayWithCsvData){
+        const columns = this.getColumns()
+
         return arrayWithCsvData = arrayWithCsvData.map(rowData => {
-            if (Normalize.isEmpty(rowData.Country)) {
-                rowData.Country = Random.generateRandomCountry()
-            }
-    
-            if (Normalize.isEmpty(rowData['Date Added'])) {
-                rowData['Date Added'] = Random.generateRandomDateAdded()
-            }
-    
-            if (Normalize.isEmpty(rowData['Rating'])) {
-                rowData['Rating'] = Random.generateRandomRating()
-            }
+            columns.forEach(column => {
+                if (Normalize.isEmpty(rowData[column.title])) {
+                    rowData[column.title] = Random.generateDataByColumnName(column)
+                }
+            })
     
             return rowData
         })
