@@ -19,7 +19,7 @@ class Random {
 
         if (column.fakeMapper){
             const fakerData = column.fakeMapper.split('.') 
-            return faker[fakerData[0]][fakerData[1]]
+            return faker[fakerData[0]][fakerData[1]]()
         }
 
         return ""

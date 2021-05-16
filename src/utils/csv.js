@@ -13,7 +13,7 @@ class CSV {
             { id: 'Release Year', title: 'Release Year', fakeMapper: 'date.past' }, 
             { id: 'Rating', title: 'Rating', fakeMapper: '' }, 
             { id: 'Duration', title: 'Duration', fakeMapper: '' }, 
-            {id: 'Listed In', title: 'Listed In', fakeMapper: '' } 
+            { id: 'Genders', title: 'Genders', fakeMapper: '' } 
         ]
     }
 

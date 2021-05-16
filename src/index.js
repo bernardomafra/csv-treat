@@ -1,4 +1,4 @@
-const csvInputFilePath = 'netflix_titles_original.csv'
+const csvInputFilePath = 'netflix_titles_original_v1.csv'
 const csvOutputFilePath = 'netflix_titles_treated.csv'
 
 const csvToJson = require('csvtojson')
@@ -20,7 +20,7 @@ csvToJson({ output: "line", noheader: false })
 .then((jsonObject) => {
     let arrayWithCsvData = jsonObject.map(row => CSV.createRowJSON(row))
 
-    console.log('\n=============== ANTES DE TRATAR OS DADOS ==================')
+    console.log('\n=============== DADOS VAZIOS ==================')
     checkAndLogEmptyValuesCount(arrayWithCsvData)
 
     arrayWithCsvData = CSV.fillJSONEmptyValues(arrayWithCsvData)
